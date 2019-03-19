@@ -19,7 +19,7 @@ class Waf(object):
     ALL = "ALL"
 
     # API settings
-    API     = "https://api.cloudflare.com/v4/"
+    API     = "https://api.cloudflare.com/client/v4/"
     TIMEOUT = 30
     ROWS    = 15
 
@@ -171,8 +171,7 @@ class Waf(object):
         rDesc = []
         for event in self.events:
 
-            rData[event['rule_id'] + " " + event['rule_message']] += 1
-
+            rData[event['rule_id'] + (event['rule_message'] or '')] += 1
             for owasp in event["triggered_rule_ids"]:
                 oData[owasp] += 1
 
